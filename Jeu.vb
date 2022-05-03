@@ -7,6 +7,8 @@
 
     Private taille As Integer = 8
 
+    Public nomJoueur As String
+
     'A chaque tick d'intervalle 1000ms, chrono_Tick est appelé
     Private Sub chrono_Tick(sender As Object, e As EventArgs) Handles chrono.Tick
         tempsRestant -= 1
@@ -14,6 +16,7 @@
         If (tempsRestant <= 0) Then
             chrono.Stop()
             MsgBox("Tout le temps s'est ecoulé", vbOKOnly, "Fin de la partie")
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         End If
     End Sub
@@ -54,6 +57,7 @@
         Dim res As MsgBoxResult = MsgBox("Êtes vous sûr de vouloir arrêter ?", vbYesNo + vbDefaultButton2, "Confirmation")
 
         If (res = MsgBoxResult.Yes) Then
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         Else
             chrono.Start()
@@ -69,15 +73,17 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As EventArgs)
-        labelNomJoueur.Text = Panel1.Controls.IndexOf(sender)
+        score += 1
         Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
         demarquerCase(Panel1.Controls.IndexOf(sender), Panel1)
         If estGagneePartie() Then
             chrono.Stop()
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score, True)
             finJeu()
         ElseIf estPartiePerdue() Then
             chrono.Stop()
             MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         End If
     End Sub

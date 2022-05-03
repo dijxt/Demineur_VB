@@ -12,6 +12,7 @@ Public Class Form1
         If ComboBox1.Text.Length >= 3 Then
             Dim j As Joueur
             j.prenom = ComboBox1.Text
+            Jeu.nomJoueur = ComboBox1.Text
             Enregistrement.ajouter(j)
             Jeu.labelNomJoueur.Text = "Nom du joueur : " & ComboBox1.Text
             ComboBox1.Text = ""
@@ -58,6 +59,11 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        FormScore.Show()
+        If Enregistrement.getMax() = 0 Then
+            MsgBox("Il n'y a aucun joueur d'enregistré.", vbOKOnly, "Scores")
+        Else
+            FormScore.Show()
+        End If
+
     End Sub
 End Class
