@@ -1,5 +1,10 @@
 Public Class Form1
+    Private firstLoad As Boolean = True
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If firstLoad Then
+            Deserialiser()
+            firstLoad = False
+        End If
         Me.Text = "Démineur"
         Button1.Enabled = False
         ComboBox1.Items.Clear()
@@ -29,6 +34,7 @@ Public Class Form1
     Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
         Dim res As Integer = MsgBox("Êtes vous sûr de vouloir quitter ?", vbYesNo + vbDefaultButton2, "Confirmation")
         If res = vbYes Then
+            Serialiser()
             e.Cancel = False
         ElseIf res = vbNo Then
             e.Cancel = True
@@ -65,5 +71,10 @@ Public Class Form1
             FormScore.Show()
         End If
 
+    End Sub
+
+    Private Sub buttonOption_Click(sender As Object, e As EventArgs) Handles buttonOption.Click
+        Me.Hide()
+        FormOptions.Show()
     End Sub
 End Class
