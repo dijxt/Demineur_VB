@@ -28,19 +28,43 @@ D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM\Windo
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM\WindowsApp1\obj\Debug\WindowsApp1.FormScore.resources
 C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.FormScore.resources
 C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.Jeu.resources
+C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbproj.CopyComplete
+C:\Users\ilyes\OneDrive\Documents\TravailBUT\Periode_D\IHM\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.FormOptions.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\bin\Debug\WindowsApp1.exe.config
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\bin\Debug\WindowsApp1.exe
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\bin\Debug\WindowsApp1.pdb
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\bin\Debug\WindowsApp1.xml
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\bin\Debug\Newtonsoft.Json.xml
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.vbproj.AssemblyReference.cache
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.vbproj.SuggestedBindingRedirects.cache
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.Form1.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.FormOptions.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.FormScore.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.Jeu.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.Resources.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.vbproj.GenerateResource.cache
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.vbproj.CopyComplete
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.exe
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.xml
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB-main\obj\Debug\WindowsApp1.pdb
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\WindowsApp1.exe.config
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\WindowsApp1.exe
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\WindowsApp1.pdb
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\WindowsApp1.xml
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\Newtonsoft.Json.xml
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.AssemblyReference.cache
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.SuggestedBindingRedirects.cache
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Form1.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormOptions.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormScore.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Jeu.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Resources.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.GenerateResource.cache
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.CopyComplete
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.exe
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.xml
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.pdb
-D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormOptions.resources

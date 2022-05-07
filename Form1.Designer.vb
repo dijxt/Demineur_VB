@@ -17,7 +17,7 @@ Partial Class Form1
     'Requise par le Concepteur Windows Form
     Private components As System.ComponentModel.IContainer
 
-    'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
+    'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _

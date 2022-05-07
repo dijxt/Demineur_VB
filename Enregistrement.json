@@ -1,0 +1,23 @@
+[
+  {
+    "prenom": "Test",
+    "nbCasesDecouvertes": 0,
+    "nbPartiesJouees": 1,
+    "tempsDeJeu": 0,
+    "meilleurScore": 60
+  },
+  {
+    "prenom": "Testii",
+    "nbCasesDecouvertes": 0,
+    "nbPartiesJouees": 1,
+    "tempsDeJeu": 0,
+    "meilleurScore": 60
+  },
+  {
+    "prenom": "Steven",
+    "nbCasesDecouvertes": 0,
+    "nbPartiesJouees": 1,
+    "tempsDeJeu": 0,
+    "meilleurScore": 60
+  }
+]

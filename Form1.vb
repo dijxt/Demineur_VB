@@ -1,5 +1,10 @@
 Public Class Form1
+    Private firstLoad As Boolean = True
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If firstLoad Then
+            Deserialiser()
+            firstLoad = False
+        End If
         Me.Text = "Démineur"
         Button1.Enabled = False
         ComboBox1.Items.Clear()
@@ -8,10 +13,16 @@ Public Class Form1
         Next
     End Sub
 
+    Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Dim c As Integer() = Options.getCouleur()
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(c(0), Byte), Integer), CType(CType(c(1), Byte), Integer), CType(CType(c(2), Byte), Integer))
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If ComboBox1.Text.Length >= 3 Then
             Dim j As Joueur
             j.prenom = ComboBox1.Text
+            Jeu.nomJoueur = ComboBox1.Text
             Enregistrement.ajouter(j)
             Jeu.labelNomJoueur.Text = "Nom du joueur : " & ComboBox1.Text
             ComboBox1.Text = ""
@@ -28,6 +39,7 @@ Public Class Form1
     Private Sub Form1_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
         Dim res As Integer = MsgBox("Êtes vous sûr de vouloir quitter ?", vbYesNo + vbDefaultButton2, "Confirmation")
         If res = vbYes Then
+            Serialiser()
             e.Cancel = False
         ElseIf res = vbNo Then
             e.Cancel = True
@@ -58,7 +70,12 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        FormScore.Show()
+        If Enregistrement.getMax() = 0 Then
+            MsgBox("Il n'y a aucun joueur d'enregistré.", vbOKOnly, "Scores")
+        Else
+            FormScore.Show()
+        End If
+
     End Sub
 
     Private Sub buttonOption_Click(sender As Object, e As EventArgs) Handles buttonOption.Click

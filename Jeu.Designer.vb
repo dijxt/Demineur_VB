@@ -17,7 +17,7 @@ Partial Class Jeu
     'Requise par le Concepteur Windows Form
     Private components As System.ComponentModel.IContainer
 
-    'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
+    'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
@@ -26,11 +26,9 @@ Partial Class Jeu
         Me.labelTempsRestant = New System.Windows.Forms.Label()
         Me.chrono = New System.Windows.Forms.Timer(Me.components)
         Me.buttonQuitter = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.labelNomJoueur = New System.Windows.Forms.Label()
         Me.buttonPause = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'labelTempsRestant
@@ -54,18 +52,9 @@ Partial Class Jeu
         Me.buttonQuitter.Text = "Quitter"
         Me.buttonQuitter.UseVisualStyleBackColor = True
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Panel1)
-        Me.GroupBox1.Location = New System.Drawing.Point(113, 108)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(277, 273)
-        Me.GroupBox1.TabIndex = 66
-        Me.GroupBox1.TabStop = False
-        '
         'Panel1
         '
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Location = New System.Drawing.Point(110, 95)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(277, 273)
         Me.Panel1.TabIndex = 68
@@ -96,14 +85,13 @@ Partial Class Jeu
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(499, 530)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.buttonPause)
         Me.Controls.Add(Me.labelNomJoueur)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.buttonQuitter)
         Me.Controls.Add(Me.labelTempsRestant)
         Me.Name = "Jeu"
         Me.Text = "Jeu"
-        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -111,7 +99,6 @@ Partial Class Jeu
     Friend WithEvents labelTempsRestant As Label
     Friend WithEvents chrono As Timer
     Friend WithEvents buttonQuitter As Button
-    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents labelNomJoueur As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents buttonPause As Button

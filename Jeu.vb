@@ -8,6 +8,8 @@
 
     Private taille As Integer = 8
 
+    Public nomJoueur As String
+
     'A chaque tick d'intervalle 1000ms, chrono_Tick est appelé
     Private Sub chrono_Tick(sender As Object, e As EventArgs) Handles chrono.Tick
         tempsRestant -= 1
@@ -15,8 +17,14 @@
         If (tempsRestant <= 0) Then
             chrono.Stop()
             MsgBox("Tout le temps s'est ecoulé", vbOKOnly, "Fin de la partie")
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         End If
+    End Sub
+
+    Private Sub FormJeu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Dim c As Integer() = Options.getCouleur()
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(c(0), Byte), Integer), CType(CType(c(1), Byte), Integer), CType(CType(c(2), Byte), Integer))
     End Sub
 
     Private Sub Jeu_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -46,6 +54,14 @@
             AddHandler ctrl.MouseDown, AddressOf Button_Click
         Next
 
+        If (taille > 8) Then
+            Dim agrandissement As Integer = tailleBouton * (taille - 8) + ecart * (taille - 8 - 1)
+            Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
+            Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
+            Me.labelNomJoueur.Location = New System.Drawing.Point(19, 431 + agrandissement)
+            Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
+        End If
+
         If (Options.getChrono()) Then
             tempsAlloue = Options.getTemps()
             tempsRestant = tempsAlloue
@@ -64,6 +80,7 @@
         Dim res As MsgBoxResult = MsgBox("Êtes vous sûr de vouloir arrêter ?", vbYesNo + vbDefaultButton2, "Confirmation")
 
         If (res = MsgBoxResult.Yes) Then
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         Else
             chrono.Start()
@@ -79,14 +96,18 @@
     End Sub
 
     Private Sub Button_Click(sender As Object, e As EventArgs)
+        score += 1
         Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
         demarquerCase(Panel1.Controls.IndexOf(sender), Panel1)
         If estGagneePartie() Then
             chrono.Stop()
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score, True)
             finJeu()
+            Me.Close()
         ElseIf estPartiePerdue() Then
             chrono.Stop()
             MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
+            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         End If
     End Sub

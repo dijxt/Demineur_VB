@@ -1,4 +1,5 @@
 ﻿Public Class FormOptions
+    Private idTheme As Integer = 0
     Private Sub buttonQuitter_Click(sender As Object, e As EventArgs) Handles buttonQuitter.Click
         Me.Hide()
         Form1.Show()
@@ -12,7 +13,7 @@
         ElseIf (res = MsgBoxResult.Yes) Then
             Dim valide = verification()
             If (valide) Then
-                Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
+                Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
                 Form1.Show()
             Else
                 e.Cancel = True
@@ -42,7 +43,7 @@
         Dim valide As Boolean = verification()
 
         If (valide) Then
-            Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
+            Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
             Me.Hide()
             Form1.Show()
         End If
@@ -54,6 +55,16 @@
             valide = False
             MsgBox("Un des TextBox n'a pas été saisie.", MsgBoxStyle.OkOnly, "Erreur")
             Return valide
+        Else
+            If (CInt(textBoxTaille.Text) > 20) Then
+                valide = False
+                MsgBox("La taille limite est 20x20.", MsgBoxStyle.OkOnly, "Erreur")
+                Return valide
+            ElseIf (CInt(textBoxTaille.Text) < 2) Then
+                valide = False
+                MsgBox("La taille de la grille doit être supérieur à 2.", MsgBoxStyle.OkOnly, "Erreur")
+                Return valide
+            End If
         End If
         If (CInt(Trim(textBoxMines.Text)) > CInt(Trim(textBoxTaille.Text)) * CInt(Trim(textBoxTaille.Text)) - 1) Then
             valide = False
@@ -72,5 +83,39 @@
 
         hScrollBarMinuteur.Minimum = 5
         hScrollBarMinuteur.Maximum = 300
+    End Sub
+
+    Private Sub FormOptions_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Dim c As Integer() = Options.getCouleur()
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(c(0), Byte), Integer), CType(CType(c(1), Byte), Integer), CType(CType(c(2), Byte), Integer))
+    End Sub
+
+    Private Sub radioButtonBlanc_CheckedChanged(sender As Object, e As EventArgs) Handles radioButtonBlanc.CheckedChanged, radioButtonRouge.CheckedChanged, radioButtonVert.CheckedChanged, radioButtonViolet.CheckedChanged
+        Dim cpt As Integer = 0
+        For Each i As RadioButton In groupBoxThemes.Controls
+            If (i.Checked) Then
+                idTheme = cpt
+            End If
+            cpt += 1
+        Next
+    End Sub
+
+    Private Sub buttonDefaut_Click(sender As Object, e As EventArgs) Handles buttonDefaut.Click
+        radioButtonViolet.Checked = True
+        textBoxTaille.Text = 8
+        textBoxMines.Text = 10
+        checkBoxPause.Checked = False
+        checkBoxMinuteur.Checked = True
+        hScrollBarMinuteur.Value = 60
+    End Sub
+
+    Private Sub textBoxTaille_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles textBoxTaille.KeyPress
+        If (e.KeyChar = vbBack) Then Exit Sub
+        If (Not Char.IsDigit(e.KeyChar)) Then
+            e.Handled = True
+        End If
+        If (textBoxTaille.Text.Length > 1) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

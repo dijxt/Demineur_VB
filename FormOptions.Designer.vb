@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormOptions
     Inherits System.Windows.Forms.Form
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,14 @@ Partial Class FormOptions
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.buttonQuitter = New System.Windows.Forms.Button()
         Me.groupBoxThemes = New System.Windows.Forms.GroupBox()
+        Me.radioButtonVert = New System.Windows.Forms.RadioButton()
+        Me.radioButtonBlanc = New System.Windows.Forms.RadioButton()
+        Me.radioButtonRouge = New System.Windows.Forms.RadioButton()
+        Me.radioButtonViolet = New System.Windows.Forms.RadioButton()
         Me.groupBoxMinuteur = New System.Windows.Forms.GroupBox()
         Me.labelTemps = New System.Windows.Forms.Label()
         Me.hScrollBarMinuteur = New System.Windows.Forms.HScrollBar()
@@ -36,6 +40,8 @@ Partial Class FormOptions
         Me.Label1 = New System.Windows.Forms.Label()
         Me.textBoxMines = New System.Windows.Forms.TextBox()
         Me.buttonEnregistrer = New System.Windows.Forms.Button()
+        Me.buttonDefaut = New System.Windows.Forms.Button()
+        Me.groupBoxThemes.SuspendLayout()
         Me.groupBoxMinuteur.SuspendLayout()
         Me.groupBoxDemineur.SuspendLayout()
         Me.SuspendLayout()
@@ -51,12 +57,60 @@ Partial Class FormOptions
         '
         'groupBoxThemes
         '
+        Me.groupBoxThemes.Controls.Add(Me.radioButtonVert)
+        Me.groupBoxThemes.Controls.Add(Me.radioButtonBlanc)
+        Me.groupBoxThemes.Controls.Add(Me.radioButtonRouge)
+        Me.groupBoxThemes.Controls.Add(Me.radioButtonViolet)
         Me.groupBoxThemes.Location = New System.Drawing.Point(588, 12)
         Me.groupBoxThemes.Name = "groupBoxThemes"
         Me.groupBoxThemes.Size = New System.Drawing.Size(200, 116)
         Me.groupBoxThemes.TabIndex = 1
         Me.groupBoxThemes.TabStop = False
         Me.groupBoxThemes.Text = "Thèmes"
+        '
+        'radioButtonVert
+        '
+        Me.radioButtonVert.AutoSize = True
+        Me.radioButtonVert.Location = New System.Drawing.Point(115, 41)
+        Me.radioButtonVert.Name = "radioButtonVert"
+        Me.radioButtonVert.Size = New System.Drawing.Size(44, 17)
+        Me.radioButtonVert.TabIndex = 3
+        Me.radioButtonVert.TabStop = True
+        Me.radioButtonVert.Text = "Vert"
+        Me.radioButtonVert.UseVisualStyleBackColor = True
+        '
+        'radioButtonBlanc
+        '
+        Me.radioButtonBlanc.AutoSize = True
+        Me.radioButtonBlanc.Location = New System.Drawing.Point(115, 64)
+        Me.radioButtonBlanc.Name = "radioButtonBlanc"
+        Me.radioButtonBlanc.Size = New System.Drawing.Size(52, 17)
+        Me.radioButtonBlanc.TabIndex = 2
+        Me.radioButtonBlanc.TabStop = True
+        Me.radioButtonBlanc.Text = "Blanc"
+        Me.radioButtonBlanc.UseVisualStyleBackColor = True
+        '
+        'radioButtonRouge
+        '
+        Me.radioButtonRouge.AutoSize = True
+        Me.radioButtonRouge.Location = New System.Drawing.Point(41, 64)
+        Me.radioButtonRouge.Name = "radioButtonRouge"
+        Me.radioButtonRouge.Size = New System.Drawing.Size(57, 17)
+        Me.radioButtonRouge.TabIndex = 1
+        Me.radioButtonRouge.Text = "Rouge"
+        Me.radioButtonRouge.UseVisualStyleBackColor = True
+        '
+        'radioButtonViolet
+        '
+        Me.radioButtonViolet.AutoSize = True
+        Me.radioButtonViolet.Checked = True
+        Me.radioButtonViolet.Location = New System.Drawing.Point(41, 41)
+        Me.radioButtonViolet.Name = "radioButtonViolet"
+        Me.radioButtonViolet.Size = New System.Drawing.Size(51, 17)
+        Me.radioButtonViolet.TabIndex = 0
+        Me.radioButtonViolet.TabStop = True
+        Me.radioButtonViolet.Text = "Violet"
+        Me.radioButtonViolet.UseVisualStyleBackColor = True
         '
         'groupBoxMinuteur
         '
@@ -177,12 +231,22 @@ Partial Class FormOptions
         Me.buttonEnregistrer.Text = "Enregistrer"
         Me.buttonEnregistrer.UseVisualStyleBackColor = True
         '
+        'buttonDefaut
+        '
+        Me.buttonDefaut.Location = New System.Drawing.Point(12, 116)
+        Me.buttonDefaut.Name = "buttonDefaut"
+        Me.buttonDefaut.Size = New System.Drawing.Size(88, 35)
+        Me.buttonDefaut.TabIndex = 5
+        Me.buttonDefaut.Text = "Par défaut"
+        Me.buttonDefaut.UseVisualStyleBackColor = True
+        '
         'FormOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.buttonDefaut)
         Me.Controls.Add(Me.buttonEnregistrer)
         Me.Controls.Add(Me.groupBoxDemineur)
         Me.Controls.Add(Me.groupBoxMinuteur)
@@ -191,6 +255,8 @@ Partial Class FormOptions
         Me.Controls.Add(Me.buttonQuitter)
         Me.Name = "FormOptions"
         Me.Text = "FormOptions"
+        Me.groupBoxThemes.ResumeLayout(False)
+        Me.groupBoxThemes.PerformLayout()
         Me.groupBoxMinuteur.ResumeLayout(False)
         Me.groupBoxMinuteur.PerformLayout()
         Me.groupBoxDemineur.ResumeLayout(False)
@@ -214,4 +280,9 @@ Partial Class FormOptions
     Friend WithEvents checkBoxPause As CheckBox
     Friend WithEvents labelTemps As Label
     Friend WithEvents hScrollBarMinuteur As HScrollBar
+    Friend WithEvents radioButtonVert As RadioButton
+    Friend WithEvents radioButtonBlanc As RadioButton
+    Friend WithEvents radioButtonRouge As RadioButton
+    Friend WithEvents radioButtonViolet As RadioButton
+    Friend WithEvents buttonDefaut As Button
 End Class
