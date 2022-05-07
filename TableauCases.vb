@@ -10,6 +10,8 @@
     Dim nbMines As Integer = 10
 
     Public Sub creerDemineur(p As Panel)
+        taille = Options.getTaille()
+        nbMines = Options.getMines()
         Dim Random As New Random()
         ReDim tabCases(taille * taille - 1)
         Dim tabMines As Integer()

@@ -63,8 +63,13 @@ Module Enregistrement
 
     Public Sub Serialiser()
         Try
+            Dim tab(getMax() - 1) As Joueur
+            For i = 0 To getMax() - 1
+                tab(i) = tabJoueurs(i)
+            Next
+
             Dim sw As StreamWriter = New StreamWriter("..\..\Enregistrement.json", False)
-            sw.WriteLine(JsonConvert.SerializeObject(tabJoueurs, Formatting.Indented))
+            sw.WriteLine(JsonConvert.SerializeObject(tab, Formatting.Indented))
             sw.Close()
         Catch ex As FileNotFoundException
             MsgBox("Fichier Enregistrement introuvable", vbOKOnly, "Erreur")

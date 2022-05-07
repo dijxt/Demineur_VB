@@ -12,7 +12,7 @@
         ElseIf (res = MsgBoxResult.Yes) Then
             Dim valide = verification()
             If (valide) Then
-                'Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
+                Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
                 Form1.Show()
             Else
                 e.Cancel = True
@@ -42,7 +42,7 @@
         Dim valide As Boolean = verification()
 
         If (valide) Then
-            'Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
+            Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked)
             Me.Hide()
             Form1.Show()
         End If

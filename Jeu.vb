@@ -90,6 +90,7 @@
             chrono.Stop()
             partieFinie(nomJoueur, tempsAlloue - tempsRestant, score, True)
             finJeu()
+            Me.Close()
         ElseIf estPartiePerdue() Then
             chrono.Stop()
             MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
