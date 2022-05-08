@@ -6,7 +6,7 @@
     Private nbMineMAX As Integer = 10
     Private score As Integer = 0
 
-    Private taille As Integer = 8
+    Private taille As Integer() = {8, 8}
 
     Public nomJoueur As String
 
@@ -37,12 +37,12 @@
         Dim posPremiereCase As Integer() = {31, 19}
         Dim ecart As Integer = 28
         Dim ligne As Integer = -1
-        For i As Integer = 0 To ((taille * taille) - 1)
-            If (i Mod taille = 0) Then
+        For i As Integer = 0 To ((taille(0) * taille(1)) - 1)
+            If (i Mod taille(0) = 0) Then
                 ligne += 1
             End If
             Me.Panel1.Controls.Add(New System.Windows.Forms.Button())
-            Panel1.Controls(i).Location = New System.Drawing.Point(posPremiereCase(0) + ecart * (i Mod taille),
+            Panel1.Controls(i).Location = New System.Drawing.Point(posPremiereCase(0) + ecart * (i Mod taille(0)),
                 posPremiereCase(1) + ecart * ligne)
             Panel1.Controls(i).Size = New System.Drawing.Size(tailleBouton, tailleBouton)
             Panel1.Controls(i).Name = "Button" & i
@@ -54,8 +54,8 @@
             AddHandler ctrl.MouseDown, AddressOf Button_Click
         Next
 
-        If (taille > 8) Then
-            Dim agrandissement As Integer = tailleBouton * (taille - 8) + ecart * (taille - 8 - 1)
+        If (taille(0) > 8) Then
+            Dim agrandissement As Integer = tailleBouton * (taille(0) - 8) + ecart * (taille(0) - 8 - 1)
             Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
             Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
             Me.labelNomJoueur.Location = New System.Drawing.Point(19, 431 + agrandissement)
@@ -80,7 +80,7 @@
         Dim res As MsgBoxResult = MsgBox("Êtes vous sûr de vouloir arrêter ?", vbYesNo + vbDefaultButton2, "Confirmation")
 
         If (res = MsgBoxResult.Yes) Then
-            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
+            Enregistrement.partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
             Me.Close()
         Else
             chrono.Start()
@@ -95,20 +95,24 @@
         MsgBox("Félicitations! Le nombre de cases révélées : " & score & ", en " & tempsAlloue - tempsRestant & " secondes.", MsgBoxStyle.OkOnly, "Score")
     End Sub
 
-    Private Sub Button_Click(sender As Object, e As EventArgs)
-        score += 1
-        Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
-        demarquerCase(Panel1.Controls.IndexOf(sender), Panel1)
-        If estGagneePartie() Then
-            chrono.Stop()
-            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score, True)
-            finJeu()
-            Me.Close()
-        ElseIf estPartiePerdue() Then
-            chrono.Stop()
-            MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
-            partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
-            Me.Close()
+    Private Sub Button_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+        If (e.Button = Windows.Forms.MouseButtons.Right) Then
+            marquerCase(Panel1.Controls.IndexOf(sender), Panel1)
+        Else
+            score += 1
+            Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
+            demasquerCase(Panel1.Controls.IndexOf(sender), Panel1)
+            If estGagneePartie() Then
+                chrono.Stop()
+                partieFinie(nomJoueur, tempsAlloue - tempsRestant, score, True)
+                finJeu()
+                Me.Close()
+            ElseIf estPartiePerdue() Then
+                chrono.Stop()
+                MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
+                partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
+                Me.Close()
+            End If
         End If
     End Sub
 

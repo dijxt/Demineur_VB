@@ -13,7 +13,7 @@
         ElseIf (res = MsgBoxResult.Yes) Then
             Dim valide = verification()
             If (valide) Then
-                Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
+                Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
                 Form1.Show()
             Else
                 e.Cancel = True
@@ -43,7 +43,7 @@
         Dim valide As Boolean = verification()
 
         If (valide) Then
-            Options.enregistrer(CInt(textBoxTaille.Text), CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
+            Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme)
             Me.Hide()
             Form1.Show()
         End If
@@ -51,22 +51,22 @@
 
     Private Function verification() As Boolean
         Dim valide As Boolean = True
-        If (Trim(textBoxMines.Text) = "" Or Trim(textBoxTaille.Text) = "") Then
+        If (Trim(textBoxMines.Text) = "" Or Trim(textBoxTailleX.Text) = "" Or Trim(textBoxTailleY.Text) = "") Then
             valide = False
             MsgBox("Un des TextBox n'a pas été saisie.", MsgBoxStyle.OkOnly, "Erreur")
             Return valide
         Else
-            If (CInt(textBoxTaille.Text) > 20) Then
+            If (CInt(textBoxTailleX.Text) > 20 Or CInt(textBoxTailleY.Text) > 20) Then
                 valide = False
                 MsgBox("La taille limite est 20x20.", MsgBoxStyle.OkOnly, "Erreur")
                 Return valide
-            ElseIf (CInt(textBoxTaille.Text) < 2) Then
+            ElseIf (CInt(textBoxTailleX.Text) < 2 Or CInt(textBoxTailleY.Text) < 2) Then
                 valide = False
                 MsgBox("La taille de la grille doit être supérieur à 2.", MsgBoxStyle.OkOnly, "Erreur")
                 Return valide
             End If
         End If
-        If (CInt(Trim(textBoxMines.Text)) > CInt(Trim(textBoxTaille.Text)) * CInt(Trim(textBoxTaille.Text)) - 1) Then
+        If (CInt(Trim(textBoxMines.Text)) > CInt(Trim(textBoxTailleX.Text)) * CInt(Trim(textBoxTailleX.Text)) - 1) Then
             valide = False
             MsgBox("Le nombre de mines doit être strictement inférieur au nombre de cases du démineur", MsgBoxStyle.OkOnly, "Erreur")
         End If
@@ -102,19 +102,19 @@
 
     Private Sub buttonDefaut_Click(sender As Object, e As EventArgs) Handles buttonDefaut.Click
         radioButtonViolet.Checked = True
-        textBoxTaille.Text = 8
+        textBoxTailleX.Text = 8
         textBoxMines.Text = 10
         checkBoxPause.Checked = False
         checkBoxMinuteur.Checked = True
         hScrollBarMinuteur.Value = 60
     End Sub
 
-    Private Sub textBoxTaille_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles textBoxTaille.KeyPress
+    Private Sub textBoxTaille_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles textBoxTailleX.KeyPress, textBoxTailleY.KeyPress
         If (e.KeyChar = vbBack) Then Exit Sub
         If (Not Char.IsDigit(e.KeyChar)) Then
             e.Handled = True
         End If
-        If (textBoxTaille.Text.Length > 1) Then
+        If (textBoxTailleX.Text.Length > 1) Then
             e.Handled = True
         End If
     End Sub

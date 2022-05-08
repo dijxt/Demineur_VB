@@ -50,12 +50,12 @@ Module Enregistrement
     End Function
 
     Public Sub partieFinie(joueur As String, tempsPartie As Integer, casesDecouvertes As Integer, Optional resultat As Boolean = False)
-        For Each player As Joueur In tabJoueurs
-            If Equals(player.prenom, joueur) Then
-                player.tempsDeJeu += tempsPartie
-                player.nbCasesDecouvertes += casesDecouvertes
-                If player.meilleurScore > tempsPartie And resultat Then
-                    player.meilleurScore = tempsPartie
+        For i As Integer = 0 To max
+            If tabJoueurs(i).prenom = joueur Then
+                tabJoueurs(i).tempsDeJeu += tempsPartie
+                tabJoueurs(i).nbCasesDecouvertes += casesDecouvertes
+                If tabJoueurs(i).meilleurScore > tempsPartie And resultat Then
+                    tabJoueurs(i).meilleurScore = tempsPartie
                 End If
             End If
         Next
