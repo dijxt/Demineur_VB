@@ -1,14 +1,14 @@
 ﻿Public Class Jeu
-    Private tempsAlloue As Integer
-    Private tempsRestant As Integer
-    Private pause As Boolean
+    Private tempsAlloue As Integer ' Le temps alloué pour le jeu
+    Private tempsRestant As Integer ' Le temps restant calculé à partir du temps alloué
+    Private pause As Boolean ' Présence ou non du bouton pause
 
-    Private nbMineMAX As Integer = 10
-    Private score As Integer = 0
+    Private nbMineMAX As Integer = 10 ' Nombre max de mines
+    Private score As Integer = 0 ' Le nombre de cases démasquées
 
-    Private taille As Integer() = {8, 8}
+    Private taille As Integer() = {8, 8} ' La taille de la grille, par défaut à 8x8
 
-    Public nomJoueur As String
+    Public nomJoueur As String ' Le nom du joueur
 
     'A chaque tick d'intervalle 1000ms, chrono_Tick est appelé
     Private Sub chrono_Tick(sender As Object, e As EventArgs) Handles chrono.Tick
@@ -22,20 +22,23 @@
         End If
     End Sub
 
+    ' Lors de l'activation du formulaire, change la couleur avec le thème sélectionné
     Private Sub FormJeu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         Dim c As Integer() = Options.getCouleur()
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(c(0), Byte), Integer), CType(CType(c(1), Byte), Integer), CType(CType(c(2), Byte), Integer))
     End Sub
 
+    ' Lors de l'affichage du formulaire, créer dans un panel toutes les cases du jeu et met en place
+    ' le chronomètre si il doit être présent
     Private Sub Jeu_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         TableauCases.creerDemineur(Panel1)
         taille = Options.getTaille()
         nbMineMAX = Options.getMines()
         pause = False
 
-        Dim tailleBouton As Integer = 22
+        Dim tailleBouton As Integer = 22 / (taille.Max / 8)
         Dim posPremiereCase As Integer() = {31, 19}
-        Dim ecart As Integer = 28
+        Dim ecart As Integer = 28 / (taille.Max / 8)
         Dim ligne As Integer = -1
         For i As Integer = 0 To ((taille(0) * taille(1)) - 1)
             If (i Mod taille(0) = 0) Then
@@ -75,6 +78,8 @@
         buttonPause.Visible = Options.getPause()
     End Sub
 
+    ' Lorsque l'utilisateur clique sur buttonQuitter, met en pause le chronomètre
+    ' affiche une MsgBox et enregistre le score si il quitte
     Private Sub buttonQuitter_Click(sender As Object, e As EventArgs) Handles buttonQuitter.Click
         chrono.Stop()
         Dim res As MsgBoxResult = MsgBox("Êtes vous sûr de vouloir arrêter ?", vbYesNo + vbDefaultButton2, "Confirmation")
@@ -87,14 +92,18 @@
         End If
     End Sub
 
+    ' Lors de la fermeture du form, affiche le form1
     Private Sub FormJeu_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
         Form1.Show()
     End Sub
 
+    ' Si le jeu est terminé et gagné, affiche une msgBox
     Private Sub finJeu()
         MsgBox("Félicitations! Le nombre de cases révélées : " & score & ", en " & tempsAlloue - tempsRestant & " secondes.", MsgBoxStyle.OkOnly, "Score")
     End Sub
 
+    ' Lors du clique sur une des cases, clique gauche démasque la case sur le démineur et dans le module
+    ' Clique droit, marque la case
     Private Sub Button_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If (e.Button = Windows.Forms.MouseButtons.Right) Then
             marquerCase(Panel1.Controls.IndexOf(sender), Panel1)
@@ -116,6 +125,7 @@
         End If
     End Sub
 
+    ' Lors du clique sur buttonPause, met en pause le chronomètre, et désactive les cases pour pas les démasquer
     Private Sub buttonPause_Click(sender As Object, e As EventArgs) Handles buttonPause.Click
         Panel1.Enabled = Not Panel1.Enabled
 

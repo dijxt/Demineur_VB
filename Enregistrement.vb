@@ -2,28 +2,27 @@ Imports System.IO
 Imports Newtonsoft.Json
 Module Enregistrement
     Public Structure Joueur
-        Dim prenom As String
-        Dim nbCasesDecouvertes As Integer
-        Dim nbPartiesJouees As Integer
-        Dim tempsDeJeu As Integer
-        Dim meilleurScore As Integer
+        Dim prenom As String                ' Prénom du joueur
+        Dim nbCasesDecouvertes As Integer   ' Nombre total de cases découvertes
+        Dim nbPartiesJouees As Integer      ' Nombre total de parties jouées
+        Dim tempsDeJeu As Integer           ' Temps total de jeu
     End Structure
 
-    Private tabJoueurs(0) As Joueur
-    Private max As Integer = 0
-    Private Const PAS_EXTENSION As Integer = 5
-    Private Const TEMPS_DEFAUT As Integer = 60
+    Private tabJoueurs(0) As Joueur ' Tableau de tous les joueurs enregistrés
+    Private max As Integer = 0 ' Indice du dernier joueur dans le tableau
+    Private Const PAS_EXTENSION As Integer = 5 ' Le pas d'extension
+    Private Const TEMPS_DEFAUT As Integer = 60 ' Le temps par défaut alloué
 
-    Public Sub ajouter(j As Joueur, Optional init As Boolean = False)
+    ' Ajoute un joueur dans le tableau
+    Public Sub ajouter(j As Joueur)
         Dim joueurExiste As Boolean = False
+        Dim pos As Integer = 0
         For Each player As Joueur In tabJoueurs
             If Equals(player.prenom, j.prenom) Then
                 joueurExiste = True
-                If Not init Then
-                    player.nbPartiesJouees += 1
-                End If
-
+                tabJoueurs(pos).nbPartiesJouees += 1
             End If
+            pos += 1
         Next
 
         If Not joueurExiste Then
@@ -31,7 +30,6 @@ Module Enregistrement
                 ReDim Preserve tabJoueurs(max + PAS_EXTENSION)
             End If
             j.nbPartiesJouees = 1
-            j.meilleurScore = TEMPS_DEFAUT
             j.nbCasesDecouvertes = 0
             j.tempsDeJeu = 0
             tabJoueurs(max) = j
@@ -40,31 +38,32 @@ Module Enregistrement
 
     End Sub
 
+    ' Retourne le joueur à l'indice i dans le tableau de joueurs
     Public Function getJoueur(i As Integer) As Joueur
         Debug.Assert(i >= 0 And i < max)
         Return tabJoueurs(i)
     End Function
 
+    ' Retourne le dernier indice du tableau
     Public Function getMax() As Integer
         Return max
     End Function
 
+    ' Augmente le temps et le nombre de cases à partir d'un prénom
     Public Sub partieFinie(joueur As String, tempsPartie As Integer, casesDecouvertes As Integer, Optional resultat As Boolean = False)
-        For i As Integer = 0 To max
+        For i As Integer = 0 To max - 1
             If tabJoueurs(i).prenom = joueur Then
                 tabJoueurs(i).tempsDeJeu += tempsPartie
                 tabJoueurs(i).nbCasesDecouvertes += casesDecouvertes
-                If tabJoueurs(i).meilleurScore > tempsPartie And resultat Then
-                    tabJoueurs(i).meilleurScore = tempsPartie
-                End If
             End If
         Next
     End Sub
 
+    ' Ecrit dans le fichier json les scores des joueurs et leur nom
     Public Sub Serialiser()
         Try
-            Dim tab(getMax() - 1) As Joueur
-            For i = 0 To getMax() - 1
+            Dim tab(max - 1) As Joueur
+            For i = 0 To max - 1
                 tab(i) = tabJoueurs(i)
             Next
 
@@ -76,6 +75,7 @@ Module Enregistrement
         End Try
     End Sub
 
+    ' Lit dans le fichier json les scores des joueurs et leur nom
     Public Sub Deserialiser()
         Try
             Dim sr As StreamReader = New StreamReader("..\..\Enregistrement.json")
@@ -85,8 +85,10 @@ Module Enregistrement
             End While
             sr.Close()
             Dim joueurs As Joueur() = JsonConvert.DeserializeObject(Of Joueur())(str)
-            For Each joueur As Joueur In joueurs
-                ajouter(joueur, True)
+            max = joueurs.Length
+            ReDim tabJoueurs(max - 1)
+            For i As Integer = 0 To max - 1
+                tabJoueurs(i) = joueurs(i)
             Next
 
         Catch ex As FileNotFoundException

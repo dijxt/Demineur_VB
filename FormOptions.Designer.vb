@@ -34,16 +34,18 @@ Partial Class FormOptions
         Me.labelMinuteur = New System.Windows.Forms.Label()
         Me.checkBoxMinuteur = New System.Windows.Forms.CheckBox()
         Me.groupBoxDemineur = New System.Windows.Forms.GroupBox()
+        Me.checkBoxPosMines = New System.Windows.Forms.CheckBox()
+        Me.groupBoxTailleGrille = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.textBoxTailleX = New System.Windows.Forms.TextBox()
         Me.textBoxTailleY = New System.Windows.Forms.TextBox()
         Me.checkBoxPause = New System.Windows.Forms.CheckBox()
-        Me.textBoxTailleX = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.textBoxMines = New System.Windows.Forms.TextBox()
+        Me.groupBoxPosMines = New System.Windows.Forms.GroupBox()
         Me.buttonEnregistrer = New System.Windows.Forms.Button()
         Me.buttonDefaut = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.groupBoxTailleGrille = New System.Windows.Forms.GroupBox()
         Me.groupBoxThemes.SuspendLayout()
         Me.groupBoxMinuteur.SuspendLayout()
         Me.groupBoxDemineur.SuspendLayout()
@@ -121,7 +123,7 @@ Partial Class FormOptions
         Me.groupBoxMinuteur.Controls.Add(Me.labelTemps)
         Me.groupBoxMinuteur.Controls.Add(Me.hScrollBarMinuteur)
         Me.groupBoxMinuteur.Controls.Add(Me.labelMinuteur)
-        Me.groupBoxMinuteur.Location = New System.Drawing.Point(588, 332)
+        Me.groupBoxMinuteur.Location = New System.Drawing.Point(142, 45)
         Me.groupBoxMinuteur.Name = "groupBoxMinuteur"
         Me.groupBoxMinuteur.Size = New System.Drawing.Size(200, 106)
         Me.groupBoxMinuteur.TabIndex = 2
@@ -159,7 +161,7 @@ Partial Class FormOptions
         Me.checkBoxMinuteur.AutoSize = True
         Me.checkBoxMinuteur.Checked = True
         Me.checkBoxMinuteur.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkBoxMinuteur.Location = New System.Drawing.Point(629, 309)
+        Me.checkBoxMinuteur.Location = New System.Drawing.Point(183, 22)
         Me.checkBoxMinuteur.Name = "checkBoxMinuteur"
         Me.checkBoxMinuteur.Size = New System.Drawing.Size(113, 17)
         Me.checkBoxMinuteur.TabIndex = 0
@@ -168,16 +170,40 @@ Partial Class FormOptions
         '
         'groupBoxDemineur
         '
+        Me.groupBoxDemineur.Controls.Add(Me.checkBoxPosMines)
         Me.groupBoxDemineur.Controls.Add(Me.groupBoxTailleGrille)
         Me.groupBoxDemineur.Controls.Add(Me.checkBoxPause)
         Me.groupBoxDemineur.Controls.Add(Me.Label1)
         Me.groupBoxDemineur.Controls.Add(Me.textBoxMines)
-        Me.groupBoxDemineur.Location = New System.Drawing.Point(147, 12)
+        Me.groupBoxDemineur.Location = New System.Drawing.Point(12, 261)
         Me.groupBoxDemineur.Name = "groupBoxDemineur"
-        Me.groupBoxDemineur.Size = New System.Drawing.Size(393, 274)
+        Me.groupBoxDemineur.Size = New System.Drawing.Size(330, 177)
         Me.groupBoxDemineur.TabIndex = 3
         Me.groupBoxDemineur.TabStop = False
         Me.groupBoxDemineur.Text = "Démineur"
+        '
+        'checkBoxPosMines
+        '
+        Me.checkBoxPosMines.AutoSize = True
+        Me.checkBoxPosMines.Location = New System.Drawing.Point(157, 48)
+        Me.checkBoxPosMines.Name = "checkBoxPosMines"
+        Me.checkBoxPosMines.Size = New System.Drawing.Size(157, 17)
+        Me.checkBoxPosMines.TabIndex = 11
+        Me.checkBoxPosMines.Text = "Choisir la position des mines"
+        Me.checkBoxPosMines.UseVisualStyleBackColor = True
+        '
+        'groupBoxTailleGrille
+        '
+        Me.groupBoxTailleGrille.Controls.Add(Me.Label3)
+        Me.groupBoxTailleGrille.Controls.Add(Me.Label4)
+        Me.groupBoxTailleGrille.Controls.Add(Me.textBoxTailleX)
+        Me.groupBoxTailleGrille.Controls.Add(Me.textBoxTailleY)
+        Me.groupBoxTailleGrille.Location = New System.Drawing.Point(22, 25)
+        Me.groupBoxTailleGrille.Name = "groupBoxTailleGrille"
+        Me.groupBoxTailleGrille.Size = New System.Drawing.Size(102, 91)
+        Me.groupBoxTailleGrille.TabIndex = 10
+        Me.groupBoxTailleGrille.TabStop = False
+        Me.groupBoxTailleGrille.Text = "Taille de la grille"
         '
         'Label3
         '
@@ -188,6 +214,25 @@ Partial Class FormOptions
         Me.Label3.Size = New System.Drawing.Size(20, 20)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "X"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(55, 27)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(20, 20)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Y"
+        '
+        'textBoxTailleX
+        '
+        Me.textBoxTailleX.Location = New System.Drawing.Point(25, 50)
+        Me.textBoxTailleX.Name = "textBoxTailleX"
+        Me.textBoxTailleX.Size = New System.Drawing.Size(23, 20)
+        Me.textBoxTailleX.TabIndex = 6
+        Me.textBoxTailleX.Text = "8"
+        Me.textBoxTailleX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'textBoxTailleY
         '
@@ -208,19 +253,10 @@ Partial Class FormOptions
         Me.checkBoxPause.Text = "Activer le bouton pause"
         Me.checkBoxPause.UseVisualStyleBackColor = True
         '
-        'textBoxTailleX
-        '
-        Me.textBoxTailleX.Location = New System.Drawing.Point(25, 50)
-        Me.textBoxTailleX.Name = "textBoxTailleX"
-        Me.textBoxTailleX.Size = New System.Drawing.Size(23, 20)
-        Me.textBoxTailleX.TabIndex = 6
-        Me.textBoxTailleX.Text = "8"
-        Me.textBoxTailleX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(19, 144)
+        Me.Label1.Location = New System.Drawing.Point(35, 126)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(89, 13)
         Me.Label1.TabIndex = 5
@@ -228,12 +264,22 @@ Partial Class FormOptions
         '
         'textBoxMines
         '
-        Me.textBoxMines.Location = New System.Drawing.Point(41, 160)
+        Me.textBoxMines.Location = New System.Drawing.Point(57, 142)
         Me.textBoxMines.Name = "textBoxMines"
         Me.textBoxMines.Size = New System.Drawing.Size(39, 20)
         Me.textBoxMines.TabIndex = 4
         Me.textBoxMines.Text = "10"
         Me.textBoxMines.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'groupBoxPosMines
+        '
+        Me.groupBoxPosMines.Location = New System.Drawing.Point(447, 157)
+        Me.groupBoxPosMines.Name = "groupBoxPosMines"
+        Me.groupBoxPosMines.Size = New System.Drawing.Size(341, 281)
+        Me.groupBoxPosMines.TabIndex = 12
+        Me.groupBoxPosMines.TabStop = False
+        Me.groupBoxPosMines.Text = "Position des mines"
+        Me.groupBoxPosMines.Visible = False
         '
         'buttonEnregistrer
         '
@@ -253,35 +299,13 @@ Partial Class FormOptions
         Me.buttonDefaut.Text = "Par défaut"
         Me.buttonDefaut.UseVisualStyleBackColor = True
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(55, 27)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(20, 20)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Y"
-        '
-        'groupBoxTailleGrille
-        '
-        Me.groupBoxTailleGrille.Controls.Add(Me.Label3)
-        Me.groupBoxTailleGrille.Controls.Add(Me.Label4)
-        Me.groupBoxTailleGrille.Controls.Add(Me.textBoxTailleX)
-        Me.groupBoxTailleGrille.Controls.Add(Me.textBoxTailleY)
-        Me.groupBoxTailleGrille.Location = New System.Drawing.Point(22, 25)
-        Me.groupBoxTailleGrille.Name = "groupBoxTailleGrille"
-        Me.groupBoxTailleGrille.Size = New System.Drawing.Size(102, 91)
-        Me.groupBoxTailleGrille.TabIndex = 10
-        Me.groupBoxTailleGrille.TabStop = False
-        Me.groupBoxTailleGrille.Text = "Taille de la grille"
-        '
         'FormOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.groupBoxPosMines)
         Me.Controls.Add(Me.buttonDefaut)
         Me.Controls.Add(Me.buttonEnregistrer)
         Me.Controls.Add(Me.groupBoxDemineur)
@@ -326,4 +350,6 @@ Partial Class FormOptions
     Friend WithEvents textBoxTailleY As TextBox
     Friend WithEvents groupBoxTailleGrille As GroupBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents checkBoxPosMines As CheckBox
+    Friend WithEvents groupBoxPosMines As GroupBox
 End Class

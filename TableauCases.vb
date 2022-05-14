@@ -1,15 +1,16 @@
 ﻿Module TableauCases
     Public Structure CaseDemineur
-        Dim estMine As Boolean
-        Dim estDemasquee As Boolean
-        Dim estMarquee As Boolean
-        Dim mineAutour As Integer
+        Dim estMine As Boolean ' Si la case est une mine
+        Dim estDemasquee As Boolean ' Si la case est démasquée
+        Dim estMarquee As Boolean ' Si la case est marquée
+        Dim mineAutour As Integer ' Le nombre de mines autour de la case
     End Structure
 
-    Dim tabCases As CaseDemineur()
-    Dim taille As Integer() = {8, 8}
-    Dim nbMines As Integer = 10
+    Dim tabCases As CaseDemineur() ' Tableau de toutes les cases du jeu
+    Dim taille As Integer() = {8, 8} ' Taille du jeu
+    Dim nbMines As Integer = 10 ' Nombre de mines
 
+    ' Initialise le démineur, ajoute toutes les cases et dipose des mines sur le jeu aléatoirement
     Public Sub creerDemineur(p As Panel)
         taille = Options.getTaille()
         nbMines = Options.getMines()
@@ -53,6 +54,7 @@
         'Next
     End Sub
 
+    ' Nombre le nombre de mines autour de la case à l'indice pos
     Public Sub compterMines(pos As Integer)
         Dim posDessus As Integer = pos - taille(0)
         If (posDessus >= 0) Then
@@ -84,6 +86,7 @@
         End If
     End Sub
 
+    ' Marque la case à l'indice pose
     Public Sub marquerCase(pos As Integer, p As Panel)
         If (Not tabCases(pos).estDemasquee) Then
             tabCases(pos).estMarquee = Not tabCases(pos).estMarquee
@@ -95,6 +98,7 @@
         End If
     End Sub
 
+    ' Démasque la case à l'indice pos et l'écrit sur le formulaire, démasque aussi les cases alentours si possible
     Public Sub demasquerCase(pos As Integer, p As Panel)
         If (Not tabCases(pos).estMarquee) Then
             tabCases(pos).estDemasquee = True
@@ -162,12 +166,14 @@
         End If
     End Sub
 
+    ' Retourne la case à l'indice i
     Public Function getCase(i As Integer) As CaseDemineur
         Debug.Assert(i >= 0 And i < (taille(0) * taille(1)))
 
         Return tabCases(i)
     End Function
 
+    ' Retourne si la partie est perdue ou non
     Public Function estPartiePerdue() As Boolean
         For Each c As CaseDemineur In tabCases
             If c.estDemasquee = True And c.estMine = True Then
@@ -177,6 +183,7 @@
         Return False
     End Function
 
+    ' Retourne si la partie est gagnée ou non
     Public Function estGagneePartie() As Boolean
         Dim res As Boolean = True
         For Each c As CaseDemineur In tabCases
@@ -186,5 +193,4 @@
         Next
         Return res And Not estPartiePerdue()
     End Function
-
 End Module
