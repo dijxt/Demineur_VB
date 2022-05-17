@@ -36,9 +36,9 @@
         nbMineMAX = Options.getMines()
         pause = False
 
-        Dim tailleBouton As Integer = 22 / (taille.Max / 8)
+        Dim tailleBouton As Integer = 24
         Dim posPremiereCase As Integer() = {31, 19}
-        Dim ecart As Integer = 28 / (taille.Max / 8)
+        Dim ecart As Integer = 24 + (taille.Max / 8)
         Dim ligne As Integer = -1
         For i As Integer = 0 To ((taille(0) * taille(1)) - 1)
             If (i Mod taille(0) = 0) Then
@@ -51,21 +51,28 @@
             Panel1.Controls(i).Name = "Button" & i
             Panel1.Controls(i).BackColor = Color.LightGray
             Panel1.Controls(i).TabIndex = 5 + i
+
         Next
 
         For Each ctrl As Control In Panel1.Controls
             AddHandler ctrl.MouseDown, AddressOf Button_Click
         Next
 
-        If (taille(0) > 8) Then
-            Dim agrandissement As Integer = tailleBouton * (taille(0) - 8) + ecart * (taille(0) - 8 - 1)
+        If (taille(0) > 8 Or taille(1) > 8) Then
+            Dim agrandissement As Integer
+            If (taille(0) > 8) Then
+                agrandissement = tailleBouton * (taille(0) - 8) + ecart * (taille(0) - 8 - 1)
+            Else
+                agrandissement = tailleBouton * (taille(1) - 8) + ecart * (taille(1) - 8 - 1)
+            End If
+
             Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
             Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
             Me.labelNomJoueur.Location = New System.Drawing.Point(19, 431 + agrandissement)
-            Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
-        End If
+                Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
+            End If
 
-        If (Options.getChrono()) Then
+            If (Options.getChrono()) Then
             tempsAlloue = Options.getTemps()
             tempsRestant = tempsAlloue
             labelTempsRestant.Text = tempsRestant
@@ -107,6 +114,7 @@
     Private Sub Button_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If (e.Button = Windows.Forms.MouseButtons.Right) Then
             marquerCase(Panel1.Controls.IndexOf(sender), Panel1)
+
         Else
             score += 1
             Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
@@ -117,6 +125,13 @@
                 finJeu()
                 Me.Close()
             ElseIf estPartiePerdue() Then
+                sender.BackgroundImage = ResizeImage(Image.FromFile("..\..\images\mine.png"), 24)
+                sender.BackColor = Color.Red
+                For i As Integer = 0 To taille(0) * taille(1) - 1
+                    If TableauCases.getCase(i).estMine And Not i = Panel1.Controls.IndexOf(sender) Then
+                        Panel1.Controls(i).BackgroundImage = ResizeImage(Image.FromFile("..\..\images\mine.png"), 24)
+                    End If
+                Next
                 chrono.Stop()
                 MsgBox("Vous avez perdu.", vbOKOnly, "Fin de la partie")
                 partieFinie(nomJoueur, tempsAlloue - tempsRestant, score)
@@ -138,5 +153,13 @@
         End If
 
         pause = Not pause
+    End Sub
+
+    Public Function ResizeImage(ByVal InputImage As Image, x As Integer) As Image
+        Return New Bitmap(InputImage, New Size(x, x))
+    End Function
+
+    Private Sub Jeu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Démineur"
     End Sub
 End Class

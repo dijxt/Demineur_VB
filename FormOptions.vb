@@ -1,5 +1,12 @@
 ﻿Public Class FormOptions
     Private idTheme As Integer = 0 ' Identifiant du thème actuel
+    Private nbMinesChoisi As Integer = 0
+    Private Const MAX_TAILLE_GRILLE As Integer = 15
+    Private Const MIN_TAILLE_GRILLE As Integer = 4
+
+    Private pasScrollBar As Integer = 5
+    Private minScrollBar As Integer = 5
+    Private maxScrollBar As Integer = 300
 
     ' Cache le formOption et affiche le Form1 lorsque l'utilisateur clique sur le bouton quitter
     Private Sub buttonQuitter_Click(sender As Object, e As EventArgs) Handles buttonQuitter.Click
@@ -16,12 +23,17 @@
         ElseIf (res = MsgBoxResult.Yes) Then
             Dim valide = verification()
             If (valide) Then
-                Dim tab As Integer() = {}
-                ReDim tab(groupBoxPosMines.Controls.Count)
+                Dim tab As Integer()
+                ReDim tab(textBoxMines.Text)
+                Dim idx As Integer = 0
                 For i As Integer = 0 To groupBoxPosMines.Controls.Count - 1
-                    tab(i) = CInt(groupBoxPosMines.Controls(i).Text)
+                    If (groupBoxPosMines.Controls(i).Text = "X") Then
+                        tab(idx) = i
+                        idx += 1
+                    End If
                 Next
-                Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, tab)
+
+                Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, TAB)
                 Form1.Show()
             Else
                 e.Cancel = True
@@ -55,10 +67,15 @@
 
         If (valide) Then
             Dim tab As Integer()
-            ReDim tab(groupBoxPosMines.Controls.Count)
+            ReDim tab(textBoxMines.Text)
+            Dim idx As Integer = 0
             For i As Integer = 0 To groupBoxPosMines.Controls.Count - 1
-                tab(i) = CInt(groupBoxPosMines.Controls(i).Text)
+                If (groupBoxPosMines.Controls(i).Text = "X") Then
+                    tab(idx) = i
+                    idx += 1
+                End If
             Next
+
             Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, tab)
             Me.Hide()
             Form1.Show()
@@ -75,7 +92,7 @@
             MsgBox("Un des TextBox n'a pas été saisie.", MsgBoxStyle.OkOnly, "Erreur")
             Return valide
         Else
-            If ((CInt(textBoxTailleX.Text) > 20 Or CInt(textBoxTailleY.Text) > 20) Or (CInt(textBoxTailleX.Text) < 2 Or CInt(textBoxTailleY.Text) < 2)) Then
+            If ((CInt(textBoxTailleX.Text) > MAX_TAILLE_GRILLE Or CInt(textBoxTailleY.Text) > MAX_TAILLE_GRILLE) Or (CInt(textBoxTailleX.Text) < MIN_TAILLE_GRILLE Or CInt(textBoxTailleY.Text) < MIN_TAILLE_GRILLE)) Then
                 valide = False
                 MsgBox("La taille limite est 20x20.", MsgBoxStyle.OkOnly, "Erreur")
                 Return valide
@@ -91,17 +108,10 @@
         End If
 
         If (checkBoxPosMines.Checked) Then
-            For Each t As TextBox In groupBoxPosMines.Controls
-                If (t.Text = "") Then
-                    MsgBox("Une des positions des mines n'a pas été renseignée.", MsgBoxStyle.OkOnly, "Erreur")
-                    Return False
-                End If
-
-                If (CInt(t.Text) < 0 Or CInt(t.Text) > textBoxTailleX.Text * textBoxTailleY.Text) Then
-                    MsgBox("La position des mines doit être strictement inférieur au nombre de cases du démineur et positif.", MsgBoxStyle.OkOnly, "Erreur")
-                End If
-            Next
-
+            If (nbMinesChoisi <> textBoxMines.Text) Then
+                MsgBox("Vous avez posé " & nbMinesChoisi & " mines au lieu de " & textBoxMines.Text & ".", MsgBoxStyle.OkOnly, "Erreur")
+                valide = False
+            End If
         End If
 
         Return valide
@@ -113,11 +123,12 @@
 
     ' Lors du chargement, pose le min et max à 5 et 300 sur la scrollBar et le déplacement est posé à 5
     Private Sub FormOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        hScrollBarMinuteur.SmallChange = 5 'le pas
-        hScrollBarMinuteur.LargeChange = 5
+        Me.Text = "Options"
+        hScrollBarMinuteur.SmallChange = pasScrollBar 'le pas
+        hScrollBarMinuteur.LargeChange = pasScrollBar
 
-        hScrollBarMinuteur.Minimum = 5
-        hScrollBarMinuteur.Maximum = 300
+        hScrollBarMinuteur.Minimum = minScrollBar
+        hScrollBarMinuteur.Maximum = maxScrollBar
     End Sub
 
     ' Lorsque le form s'active, change la couleur du thème avec celui qui a été sélectionnée
@@ -180,30 +191,50 @@
             groupBoxPosMines.Visible = valide
 
             If (valide) Then
-                Dim tailleCheckBox As Integer = 15
+                Dim tailleButton As Integer = 17
                 Dim posX As Integer = 10
                 Dim posY As Integer = 20
-                Dim colonne As Integer = -1
+                Dim lignes As Integer = -1
+
                 For i As Integer = 0 To CInt(textBoxTailleX.Text) * CInt(textBoxTailleY.Text) - 1
-                    If (i Mod CInt(textBoxTailleY.Text) = 0) Then
-                        colonne += 1
+                    If (i Mod CInt(textBoxTailleX.Text) = 0) Then
+                        lignes += 1
                     End If
-                    groupBoxPosMines.Controls.Add(New System.Windows.Forms.CheckBox())
-                    groupBoxPosMines.Controls(i).Location = New System.Drawing.Point(posX + colonne * tailleCheckBox, posY + (i Mod CInt(textBoxTailleY.Text)) * tailleCheckBox)
-                    groupBoxPosMines.Controls(i).Size = New System.Drawing.Size(tailleCheckBox, tailleCheckBox)
-                    groupBoxPosMines.Controls(i).Text = ""
+                    groupBoxPosMines.Controls.Add(New System.Windows.Forms.Button())
+                    groupBoxPosMines.Controls(i).Location = New System.Drawing.Point(posX + (i Mod CInt(textBoxTailleX.Text)) * tailleButton, posY + lignes * tailleButton)
+                    Console.WriteLine(i Mod CInt(textBoxTailleX.Text) * tailleButton & " " & posY + lignes * tailleButton)
+                    groupBoxPosMines.Controls(i).Size = New System.Drawing.Size(tailleButton, tailleButton)
+                    groupBoxPosMines.Controls(i).BackColor = Color.LightGray
+                    groupBoxPosMines.Controls(i).Visible = True
                 Next
 
                 For Each ctrl As Control In groupBoxPosMines.Controls
                     AddHandler ctrl.MouseDown, AddressOf checkBoxPosMines_Click
                 Next
+
+                textBoxTailleX.Enabled = False
+                textBoxTailleY.Enabled = False
             End If
         Else
             groupBoxPosMines.Controls.Clear()
+            nbMinesChoisi = 0
+            textBoxTailleX.Enabled = True
+            textBoxTailleY.Enabled = True
         End If
     End Sub
 
     Private Sub checkBoxPosMines_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-
+        If (sender.text = "") Then
+            If (nbMinesChoisi >= textBoxMines.Text) Then
+                MsgBox("Vous avez déjà posé toutes les mines.")
+                sender.text = ""
+            Else
+                nbMinesChoisi += 1
+                sender.text = "X"
+            End If
+        Else
+            sender.text = ""
+            nbMinesChoisi -= 1
+        End If
     End Sub
 End Class

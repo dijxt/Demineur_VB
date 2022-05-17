@@ -1,15 +1,15 @@
 [
   {
     "prenom": "Test",
-    "nbCasesDecouvertes": 61,
-    "nbPartiesJouees": 3,
-    "tempsDeJeu": 154
+    "nbCasesDecouvertes": 334,
+    "nbPartiesJouees": 67,
+    "tempsDeJeu": 908
   },
   {
     "prenom": "Testii",
-    "nbCasesDecouvertes": 11,
-    "nbPartiesJouees": 4,
-    "tempsDeJeu": 8
+    "nbCasesDecouvertes": 43,
+    "nbPartiesJouees": 20,
+    "tempsDeJeu": 66
   },
   {
     "prenom": "Steven",

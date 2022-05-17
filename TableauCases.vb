@@ -33,17 +33,24 @@
             tabCases(i) = c
         Next
 
+        If (Not Options.getChoixPosMines) Then
+            For i As Integer = 0 To nbMines - 1
+                Dim pos As Integer = Random.Next(0, nbCases - 1)
 
-        For i As Integer = 0 To nbMines - 1
-            Dim pos As Integer = Random.Next(0, nbCases - 1)
+                While (tabCases(pos).estMine)
+                    pos = Random.Next(0, nbCases - 1)
+                End While
 
-            While (tabCases(pos).estMine)
-                pos = Random.Next(0, nbCases - 1)
-            End While
-
-            tabCases(pos).estMine = True
-            compterMines(pos)
-        Next
+                tabCases(pos).estMine = True
+                compterMines(pos)
+            Next
+        Else
+            Dim tab As Integer() = Options.getTabMines()
+            For i As Integer = 0 To nbMines - 1
+                tabCases(tab(i)).estMine = True
+                compterMines(tab(i))
+            Next
+        End If
 
         'For i As Integer = 0 To taille * taille - 1
         'If (Not tabCases(i).estMine) Then
@@ -91,23 +98,23 @@
         If (Not tabCases(pos).estDemasquee) Then
             tabCases(pos).estMarquee = Not tabCases(pos).estMarquee
             If (tabCases(pos).estMarquee) Then
-                p.Controls(pos).Text = "M"
+                p.Controls(pos).BackgroundImage = Jeu.ResizeImage(Image.FromFile("..\..\images\flag.png"), 24)
             Else
-                p.Controls(pos).Text = ""
+                p.Controls(pos).BackgroundImage = Nothing
             End If
         End If
     End Sub
 
     ' Démasque la case à l'indice pos et l'écrit sur le formulaire, démasque aussi les cases alentours si possible
     Public Sub demasquerCase(pos As Integer, p As Panel)
+        p.Controls(pos).Enabled = False
         If (Not tabCases(pos).estMarquee) Then
             tabCases(pos).estDemasquee = True
-            p.Controls(pos).Text = "x"
+            p.Controls(pos).BackColor = Color.Transparent
             If (tabCases(pos).mineAutour <> 0) Then
                 p.Controls(pos).Text = tabCases(pos).mineAutour
             End If
             If (tabCases(pos).estMine) Then
-                p.Controls(pos).Text = "m"
             End If
         End If
 

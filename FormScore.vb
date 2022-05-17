@@ -6,6 +6,7 @@
 
     ' Lors du chargement, ajoute dans les listeBoc les scores des joueurs
     Private Sub FormScore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Score"
         For i As Integer = 0 To Enregistrement.getMax() - 1
             Dim j As Joueur = Enregistrement.getJoueur(i)
             ListBox1.Items.Add(j.prenom)

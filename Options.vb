@@ -63,4 +63,12 @@
     Public Function getCouleur() As Integer()
         Return couleur
     End Function
+
+    Public Function getChoixPosMines() As Boolean
+        Return choisirPosMines
+    End Function
+
+    Public Function getTabMines() As Integer()
+        Return posMines
+    End Function
 End Module

@@ -273,9 +273,10 @@ Partial Class FormOptions
         '
         'groupBoxPosMines
         '
-        Me.groupBoxPosMines.Location = New System.Drawing.Point(447, 157)
+        Me.groupBoxPosMines.AutoSize = True
+        Me.groupBoxPosMines.Location = New System.Drawing.Point(507, 157)
         Me.groupBoxPosMines.Name = "groupBoxPosMines"
-        Me.groupBoxPosMines.Size = New System.Drawing.Size(341, 281)
+        Me.groupBoxPosMines.Size = New System.Drawing.Size(281, 281)
         Me.groupBoxPosMines.TabIndex = 12
         Me.groupBoxPosMines.TabStop = False
         Me.groupBoxPosMines.Text = "Position des mines"
