@@ -9,6 +9,8 @@
     Private taille As Integer() = {8, 8} ' La taille de la grille, par défaut à 8x8
 
     Public nomJoueur As String ' Le nom du joueur
+    Private minesRestantes As Integer = 0 ' le nombre de mines - le nombre de cases que le joueur a marqué 
+    Private premiereCase As Boolean = True ' Lorsque le joueur démasque la première case
 
     'A chaque tick d'intervalle 1000ms, chrono_Tick est appelé
     Private Sub chrono_Tick(sender As Object, e As EventArgs) Handles chrono.Tick
@@ -35,6 +37,8 @@
         taille = Options.getTaille()
         nbMineMAX = Options.getMines()
         pause = False
+        minesRestantes = nbMineMAX
+        premiereCase = True
 
         Dim tailleBouton As Integer = 24
         Dim posPremiereCase As Integer() = {31, 19}
@@ -66,23 +70,24 @@
                 agrandissement = tailleBouton * (taille(1) - 8) + ecart * (taille(1) - 8 - 1)
             End If
 
-            Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
-            Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
+            'Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
+            'Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
             Me.labelNomJoueur.Location = New System.Drawing.Point(19, 431 + agrandissement)
-                Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
-            End If
+            Me.labelMinesRestantes.Location = New System.Drawing.Point(19, 390 + agrandissement)
+            Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
+        End If
 
-            If (Options.getChrono()) Then
+        If (Options.getChrono()) Then
             tempsAlloue = Options.getTemps()
             tempsRestant = tempsAlloue
             labelTempsRestant.Text = tempsRestant
             chrono.Interval = 1000
-            chrono.Start()
         Else
             labelTempsRestant.Hide()
         End If
 
         buttonPause.Visible = Options.getPause()
+        labelMinesRestantes.Text = "Potentielles mines restantes : " & minesRestantes
     End Sub
 
     ' Lorsque l'utilisateur clique sur buttonQuitter, met en pause le chronomètre
@@ -112,9 +117,27 @@
     ' Lors du clique sur une des cases, clique gauche démasque la case sur le démineur et dans le module
     ' Clique droit, marque la case
     Private Sub Button_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+        If (premiereCase) Then
+            premiereCase = False
+            If (Options.getChrono()) Then
+                chrono.Start()
+            End If
+        End If
+
         If (e.Button = Windows.Forms.MouseButtons.Right) Then
             marquerCase(Panel1.Controls.IndexOf(sender), Panel1)
 
+            Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
+            If (c.estMarquee) Then
+                If (minesRestantes > 0) Then
+                    minesRestantes -= 1
+                End If
+            Else
+                If (TableauCases.toutesCasesMarquees() < nbMineMAX) Then
+                    minesRestantes += 1
+                End If
+            End If
+            labelMinesRestantes.Text = "Potentielles mines restantes : " & minesRestantes
         Else
             score += 1
             Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
@@ -161,5 +184,10 @@
 
     Private Sub Jeu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Démineur"
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+    End Sub
+
+    Private Sub buttonPremierCoup_Click(sender As Object, e As EventArgs) Handles buttonPremierCoup.Click
+        premierCoup(Panel1)
     End Sub
 End Class

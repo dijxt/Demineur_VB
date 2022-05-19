@@ -33,7 +33,7 @@
                     End If
                 Next
 
-                Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, TAB)
+                Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, tab)
                 Form1.Show()
             Else
                 e.Cancel = True
@@ -124,6 +124,7 @@
     ' Lors du chargement, pose le min et max à 5 et 300 sur la scrollBar et le déplacement est posé à 5
     Private Sub FormOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Options"
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
         hScrollBarMinuteur.SmallChange = pasScrollBar 'le pas
         hScrollBarMinuteur.LargeChange = pasScrollBar
 
@@ -152,6 +153,7 @@
     Private Sub buttonDefaut_Click(sender As Object, e As EventArgs) Handles buttonDefaut.Click
         radioButtonViolet.Checked = True
         textBoxTailleX.Text = 8
+        textBoxTailleY.Text = 8
         textBoxMines.Text = 10
         checkBoxPause.Checked = False
         checkBoxMinuteur.Checked = True
@@ -167,6 +169,18 @@
             e.Handled = True
         End If
         If (sender.Text.Length > 1) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    ' Lorsque l'utilisateur écrit dans les textBox textBoxTailleX, textBoxTailleY, empêche l'écriture de lettres et
+    ' des caractères de plus de longueur 2
+    Private Sub textBoxMines_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles textBoxMines.KeyPress
+        If (e.KeyChar = vbBack) Then Exit Sub
+        If (Not Char.IsDigit(e.KeyChar)) Then
+            e.Handled = True
+        End If
+        If (sender.Text.Length > 2) Then
             e.Handled = True
         End If
     End Sub

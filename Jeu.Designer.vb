@@ -29,6 +29,8 @@ Partial Class Jeu
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.labelNomJoueur = New System.Windows.Forms.Label()
         Me.buttonPause = New System.Windows.Forms.Button()
+        Me.labelMinesRestantes = New System.Windows.Forms.Label()
+        Me.buttonPremierCoup = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'labelTempsRestant
@@ -54,6 +56,7 @@ Partial Class Jeu
         '
         'Panel1
         '
+        Me.Panel1.AutoSize = True
         Me.Panel1.Location = New System.Drawing.Point(110, 95)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(277, 273)
@@ -79,12 +82,34 @@ Partial Class Jeu
         Me.buttonPause.UseVisualStyleBackColor = True
         Me.buttonPause.Visible = False
         '
+        'labelMinesRestantes
+        '
+        Me.labelMinesRestantes.AutoSize = True
+        Me.labelMinesRestantes.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.labelMinesRestantes.Location = New System.Drawing.Point(19, 390)
+        Me.labelMinesRestantes.Name = "labelMinesRestantes"
+        Me.labelMinesRestantes.Size = New System.Drawing.Size(216, 20)
+        Me.labelMinesRestantes.TabIndex = 69
+        Me.labelMinesRestantes.Text = "Potentielles mines restantes :"
+        '
+        'buttonPremierCoup
+        '
+        Me.buttonPremierCoup.Location = New System.Drawing.Point(398, 402)
+        Me.buttonPremierCoup.Name = "buttonPremierCoup"
+        Me.buttonPremierCoup.Size = New System.Drawing.Size(89, 23)
+        Me.buttonPremierCoup.TabIndex = 70
+        Me.buttonPremierCoup.Text = "Premier coup"
+        Me.buttonPremierCoup.UseVisualStyleBackColor = True
+        '
         'Jeu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(499, 530)
+        Me.Controls.Add(Me.buttonPremierCoup)
+        Me.Controls.Add(Me.labelMinesRestantes)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.buttonPause)
         Me.Controls.Add(Me.labelNomJoueur)
@@ -102,4 +127,6 @@ Partial Class Jeu
     Friend WithEvents labelNomJoueur As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents buttonPause As Button
+    Friend WithEvents labelMinesRestantes As Label
+    Friend WithEvents buttonPremierCoup As Button
 End Class

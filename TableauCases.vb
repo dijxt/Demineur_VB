@@ -35,10 +35,10 @@
 
         If (Not Options.getChoixPosMines) Then
             For i As Integer = 0 To nbMines - 1
-                Dim pos As Integer = Random.Next(0, nbCases - 1)
+                Dim pos As Integer = Random.Next(0, nbCases)
 
                 While (tabCases(pos).estMine)
-                    pos = Random.Next(0, nbCases - 1)
+                    pos = Random.Next(0, nbCases)
                 End While
 
                 tabCases(pos).estMine = True
@@ -180,6 +180,17 @@
         Return tabCases(i)
     End Function
 
+    Public Function toutesCasesMarquees() As Integer
+        Dim nbMarque As Integer = 0
+        For Each c As CaseDemineur In tabCases
+            If (c.estMarquee) Then
+                nbMarque += 1
+            End If
+        Next
+
+        Return nbMarque
+    End Function
+
     ' Retourne si la partie est perdue ou non
     Public Function estPartiePerdue() As Boolean
         For Each c As CaseDemineur In tabCases
@@ -200,4 +211,13 @@
         Next
         Return res And Not estPartiePerdue()
     End Function
+
+    Public Sub premierCoup(p As Panel)
+        For i As Integer = 0 To tabCases.Length
+            If (tabCases(i).mineAutour = 0 And Not tabCases(i).estMine) Then
+                demasquerCase(i, p)
+                Exit For
+            End If
+        Next
+    End Sub
 End Module
