@@ -2,10 +2,12 @@ Imports System.IO
 Imports Newtonsoft.Json
 Module Enregistrement
     Public Structure Joueur
-        Dim prenom As String                ' Prénom du joueur
-        Dim nbCasesDecouvertes As Integer   ' Nombre total de cases découvertes
-        Dim nbPartiesJouees As Integer      ' Nombre total de parties jouées
-        Dim tempsDeJeu As Integer           ' Temps total de jeu
+        Dim prenom As String
+        Dim meilleurScore As Integer
+        Dim tempsMeilleurScore As Integer
+        Dim nbCasesDecouvertesTotal As Integer
+        Dim tempsDeJeu As Integer
+        Dim nbPartiesJouees As Integer
     End Structure
 
     Private tabJoueurs(0) As Joueur ' Tableau de tous les joueurs enregistrés
@@ -30,7 +32,9 @@ Module Enregistrement
                 ReDim Preserve tabJoueurs(max + PAS_EXTENSION)
             End If
             j.nbPartiesJouees = 1
-            j.nbCasesDecouvertes = 0
+            j.meilleurScore = 0
+            j.tempsMeilleurScore = 0
+            j.nbCasesDecouvertesTotal = 0
             j.tempsDeJeu = 0
             tabJoueurs(max) = j
             max += 1
@@ -54,7 +58,15 @@ Module Enregistrement
         For i As Integer = 0 To max - 1
             If tabJoueurs(i).prenom = joueur Then
                 tabJoueurs(i).tempsDeJeu += tempsPartie
-                tabJoueurs(i).nbCasesDecouvertes += casesDecouvertes
+                tabJoueurs(i).nbCasesDecouvertesTotal += casesDecouvertes
+                If casesDecouvertes = tabJoueurs(i).meilleurScore And resultat Then
+                    If tabJoueurs(i).tempsMeilleurScore > tempsPartie Then
+                        tabJoueurs(i).tempsMeilleurScore = tempsPartie
+                    End If
+                ElseIf casesDecouvertes > tabJoueurs(i).meilleurScore And resultat Then
+                    tabJoueurs(i).meilleurScore = casesDecouvertes
+                    tabJoueurs(i).tempsMeilleurScore = tempsPartie
+                End If
             End If
         Next
     End Sub

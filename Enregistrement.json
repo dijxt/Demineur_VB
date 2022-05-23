@@ -1,20 +1,18 @@
 [
   {
-    "prenom": "Test",
-    "nbCasesDecouvertes": 362,
-    "nbPartiesJouees": 91,
-    "tempsDeJeu": 984
+    "prenom": "Test--un",
+    "meilleurScore": 54,
+    "tempsMeilleurScore": 53,
+    "nbCasesDecouvertesTotal": 164,
+    "tempsDeJeu": 75,
+    "nbPartiesJouees": 8
   },
   {
-    "prenom": "Testii",
-    "nbCasesDecouvertes": 51,
-    "nbPartiesJouees": 28,
-    "tempsDeJeu": 90
-  },
-  {
-    "prenom": "Steven",
-    "nbCasesDecouvertes": 8,
-    "nbPartiesJouees": 3,
-    "tempsDeJeu": 7
+    "prenom": "Test--deux",
+    "meilleurScore": 54,
+    "tempsMeilleurScore": 41,
+    "nbCasesDecouvertesTotal": 54,
+    "tempsDeJeu": 41,
+    "nbPartiesJouees": 1
   }
 ]

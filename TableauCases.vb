@@ -107,6 +107,7 @@
 
     ' Démasque la case à l'indice pos et l'écrit sur le formulaire, démasque aussi les cases alentours si possible
     Public Sub demasquerCase(pos As Integer, p As Panel)
+        Jeu.scoreInc()
         p.Controls(pos).Enabled = False
         If (Not tabCases(pos).estMarquee) Then
             tabCases(pos).estDemasquee = True

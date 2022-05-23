@@ -63,18 +63,12 @@
         Next
 
         If (taille(0) > 8 Or taille(1) > 8) Then
-            Dim agrandissement As Integer
-            If (taille(0) > 8) Then
-                agrandissement = tailleBouton * (taille(0) - 8) + ecart * (taille(0) - 8 - 1)
-            Else
-                agrandissement = tailleBouton * (taille(1) - 8) + ecart * (taille(1) - 8 - 1)
-            End If
-
             'Me.Panel1.Size = New System.Drawing.Size(277 + agrandissement, 273 + agrandissement)
             'Me.ClientSize = New System.Drawing.Size(499 + agrandissement, 530 + agrandissement)
-            Me.labelNomJoueur.Location = New System.Drawing.Point(19, 431 + agrandissement)
-            Me.labelMinesRestantes.Location = New System.Drawing.Point(19, 390 + agrandissement)
-            Me.buttonPause.Location = New System.Drawing.Point(400 + agrandissement, 431 + agrandissement)
+            Me.labelNomJoueur.Location = New System.Drawing.Point(19, 63 + Panel1.Height + Panel1.Location.Y)
+            Me.labelMinesRestantes.Location = New System.Drawing.Point(19, 22 + Panel1.Height + Panel1.Location.Y)
+            Me.buttonPause.Location = New System.Drawing.Point(Panel1.Height + Panel1.Location.X - 100, 40 + Panel1.Height + Panel1.Location.Y)
+            Me.buttonPremierCoup.Location = New System.Drawing.Point(Panel1.Height + Panel1.Location.X - 100, Panel1.Height + Panel1.Location.Y + 15)
         End If
 
         If (Options.getChrono()) Then
@@ -106,6 +100,7 @@
 
     ' Lors de la fermeture du form, affiche le form1
     Private Sub FormJeu_Closing(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing
+        Form1.ComboBox1.Text = nomJoueur
         Form1.Show()
     End Sub
 
@@ -119,6 +114,7 @@
     Private Sub Button_Click(sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If (premiereCase) Then
             premiereCase = False
+            buttonPremierCoup.Enabled = False
             If (Options.getChrono()) Then
                 chrono.Start()
             End If
@@ -126,7 +122,6 @@
 
         If (e.Button = Windows.Forms.MouseButtons.Right) Then
             marquerCase(Panel1.Controls.IndexOf(sender), Panel1)
-
             Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
             If (c.estMarquee) Then
                 If (minesRestantes > 0) Then
@@ -139,7 +134,6 @@
             End If
             labelMinesRestantes.Text = "Potentielles mines restantes : " & minesRestantes
         Else
-            score += 1
             Dim c As CaseDemineur = TableauCases.getCase(Panel1.Controls.IndexOf(sender))
             demasquerCase(Panel1.Controls.IndexOf(sender), Panel1)
             If estGagneePartie() Then
@@ -188,6 +182,14 @@
     End Sub
 
     Private Sub buttonPremierCoup_Click(sender As Object, e As EventArgs) Handles buttonPremierCoup.Click
+        buttonPremierCoup.Enabled = False
         premierCoup(Panel1)
+        If (Options.getChrono()) Then
+            chrono.Start()
+        End If
+    End Sub
+
+    Public Sub scoreInc()
+        score += 1
     End Sub
 End Class

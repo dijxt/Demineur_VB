@@ -55,8 +55,11 @@
     Private Sub checkBoxMinuteur_CheckedChanged(sender As Object, e As EventArgs) Handles checkBoxMinuteur.CheckedChanged
         If (checkBoxMinuteur.Checked) Then
             groupBoxMinuteur.Show()
+            checkBoxPause.Enabled = True
         Else
             groupBoxMinuteur.Hide()
+            checkBoxPause.Checked = False
+            checkBoxPause.Enabled = False
         End If
     End Sub
 
@@ -94,7 +97,7 @@
         Else
             If ((CInt(textBoxTailleX.Text) > MAX_TAILLE_GRILLE Or CInt(textBoxTailleY.Text) > MAX_TAILLE_GRILLE) Or (CInt(textBoxTailleX.Text) < MIN_TAILLE_GRILLE Or CInt(textBoxTailleY.Text) < MIN_TAILLE_GRILLE)) Then
                 valide = False
-                MsgBox("La taille limite est 20x20.", MsgBoxStyle.OkOnly, "Erreur")
+                MsgBox("La taille limite est 15x15.", MsgBoxStyle.OkOnly, "Erreur")
                 Return valide
             End If
         End If
