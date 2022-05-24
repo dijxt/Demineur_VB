@@ -98,7 +98,7 @@
         If (Not tabCases(pos).estDemasquee) Then
             tabCases(pos).estMarquee = Not tabCases(pos).estMarquee
             If (tabCases(pos).estMarquee) Then
-                p.Controls(pos).BackgroundImage = Jeu.ResizeImage(Image.FromFile("..\..\images\flag.png"), 24)
+                p.Controls(pos).BackgroundImage = FormJeu.ResizeImage(Image.FromFile("..\..\images\flag.png"), 24)
             Else
                 p.Controls(pos).BackgroundImage = Nothing
             End If
@@ -107,7 +107,7 @@
 
     ' Démasque la case à l'indice pos et l'écrit sur le formulaire, démasque aussi les cases alentours si possible
     Public Sub demasquerCase(pos As Integer, p As Panel)
-        Jeu.scoreInc()
+        FormJeu.scoreInc()
         p.Controls(pos).Enabled = False
         If (Not tabCases(pos).estMarquee) Then
             tabCases(pos).estDemasquee = True
@@ -214,11 +214,15 @@
     End Function
 
     Public Sub premierCoup(p As Panel)
-        For i As Integer = 0 To tabCases.Length
-            If (tabCases(i).mineAutour = 0 And Not tabCases(i).estMine) Then
-                demasquerCase(i, p)
-                Exit For
-            End If
+        Dim minesMax As Integer = 8
+        For minesAutours = 0 To minesMax
+            For i As Integer = 0 To tabCases.Length - 1
+                If (tabCases(i).mineAutour = minesAutours And Not tabCases(i).estMine) Then
+                    demasquerCase(i, p)
+                    Exit Sub
+                End If
+            Next
         Next
+
     End Sub
 End Module

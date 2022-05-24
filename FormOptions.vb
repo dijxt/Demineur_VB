@@ -11,7 +11,7 @@
     ' Cache le formOption et affiche le Form1 lorsque l'utilisateur clique sur le bouton quitter
     Private Sub buttonQuitter_Click(sender As Object, e As EventArgs) Handles buttonQuitter.Click
         Me.Hide()
-        Form1.Show()
+        FormPrincipal.Show()
     End Sub
 
     ' Lors de la fermeture du formulaire affiche une msgBox pour demander d'enregistrer
@@ -19,7 +19,7 @@
         Dim res As MsgBoxResult = MsgBox("Voulez-vous enregistrer ?", MsgBoxStyle.YesNoCancel)
 
         If (res = MsgBoxResult.No) Then
-            Form1.Show()
+            FormPrincipal.Show()
         ElseIf (res = MsgBoxResult.Yes) Then
             Dim valide = verification()
             If (valide) Then
@@ -34,7 +34,7 @@
                 Next
 
                 Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, tab)
-                Form1.Show()
+                FormPrincipal.Show()
             Else
                 e.Cancel = True
             End If
@@ -81,7 +81,7 @@
 
             Options.enregistrer({CInt(textBoxTailleX.Text), CInt(textBoxTailleY.Text)}, CInt(labelTemps.Text), CInt(textBoxMines.Text), CInt(checkBoxMinuteur.Checked), checkBoxPause.Checked, idTheme, checkBoxPosMines.Checked, tab)
             Me.Hide()
-            Form1.Show()
+            FormPrincipal.Show()
         End If
     End Sub
 
@@ -219,7 +219,6 @@
                     End If
                     groupBoxPosMines.Controls.Add(New System.Windows.Forms.Button())
                     groupBoxPosMines.Controls(i).Location = New System.Drawing.Point(posX + (i Mod CInt(textBoxTailleX.Text)) * tailleButton, posY + lignes * tailleButton)
-                    Console.WriteLine(i Mod CInt(textBoxTailleX.Text) * tailleButton & " " & posY + lignes * tailleButton)
                     groupBoxPosMines.Controls(i).Size = New System.Drawing.Size(tailleButton, tailleButton)
                     groupBoxPosMines.Controls(i).BackColor = Color.LightGray
                     groupBoxPosMines.Controls(i).Visible = True
@@ -231,12 +230,14 @@
 
                 textBoxTailleX.Enabled = False
                 textBoxTailleY.Enabled = False
+                textBoxMines.Enabled = False
             End If
         Else
             groupBoxPosMines.Controls.Clear()
             nbMinesChoisi = 0
             textBoxTailleX.Enabled = True
             textBoxTailleY.Enabled = True
+            textBoxMines.Enabled = True
         End If
     End Sub
 

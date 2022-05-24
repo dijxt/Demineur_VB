@@ -57,10 +57,8 @@ D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bi
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\bin\Debug\Newtonsoft.Json.xml
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.AssemblyReference.cache
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.SuggestedBindingRedirects.cache
-D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Form1.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormOptions.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormScore.resources
-D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Jeu.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.Resources.resources
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.GenerateResource.cache
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
@@ -68,3 +66,5 @@ D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\ob
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.exe
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.xml
 D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.pdb
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormPrincipal.resources
+D:\Programmation\Fichier programmation\BUT 108\Fichier VB.NET\Demineur_IHM_VB\obj\Debug\WindowsApp1.FormJeu.resources
