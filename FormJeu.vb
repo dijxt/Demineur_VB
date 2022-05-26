@@ -71,14 +71,17 @@
             Me.buttonPremierCoup.Location = New System.Drawing.Point(Panel1.Height + Panel1.Location.X - 100, Panel1.Height + Panel1.Location.Y + 15)
         End If
 
+        chrono.Interval = 1000
         If (Options.getChrono()) Then
             tempsAlloue = Options.getTemps()
-            tempsRestant = tempsAlloue
-            labelTempsRestant.Text = tempsRestant
-            chrono.Interval = 1000
+
         Else
+            tempsAlloue = Integer.MaxValue
+
             labelTempsRestant.Hide()
         End If
+        tempsRestant = tempsAlloue
+        labelTempsRestant.Text = tempsRestant
 
         buttonPause.Visible = Options.getPause()
         labelMinesRestantes.Text = "Potentielles mines restantes : " & minesRestantes
@@ -115,9 +118,7 @@
         If (premiereCase) Then
             premiereCase = False
             buttonPremierCoup.Enabled = False
-            If (Options.getChrono()) Then
-                chrono.Start()
-            End If
+            chrono.Start()
         End If
 
         If (e.Button = Windows.Forms.MouseButtons.Right) Then
@@ -159,6 +160,8 @@
 
     ' Lors du clique sur buttonPause, met en pause le chronomètre, et désactive les cases pour pas les démasquer
     Private Sub buttonPause_Click(sender As Object, e As EventArgs) Handles buttonPause.Click
+        If (premiereCase) Then Exit Sub
+
         Panel1.Enabled = Not Panel1.Enabled
 
         If (pause) Then
@@ -184,9 +187,8 @@
     Private Sub buttonPremierCoup_Click(sender As Object, e As EventArgs) Handles buttonPremierCoup.Click
         buttonPremierCoup.Enabled = False
         premierCoup(Panel1)
-        If (Options.getChrono()) Then
-            chrono.Start()
-        End If
+        chrono.Start()
+
 
         If estGagneePartie() Then
             chrono.Stop()

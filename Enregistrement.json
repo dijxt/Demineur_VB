@@ -3,16 +3,24 @@
     "prenom": "Test--un",
     "meilleurScore": 54,
     "tempsMeilleurScore": 53,
-    "nbCasesDecouvertesTotal": 428,
-    "tempsDeJeu": 119,
-    "nbPartiesJouees": 19
+    "nbCasesDecouvertesTotal": 487,
+    "tempsDeJeu": 131,
+    "nbPartiesJouees": 25
   },
   {
     "prenom": "Test--deux",
     "meilleurScore": 54,
     "tempsMeilleurScore": 41,
-    "nbCasesDecouvertesTotal": 104,
-    "tempsDeJeu": 46,
-    "nbPartiesJouees": 5
+    "nbCasesDecouvertesTotal": 150,
+    "tempsDeJeu": 56,
+    "nbPartiesJouees": 6
+  },
+  {
+    "prenom": "Test--trois",
+    "meilleurScore": 63,
+    "tempsMeilleurScore": 0,
+    "nbCasesDecouvertesTotal": 268,
+    "tempsDeJeu": 51,
+    "nbPartiesJouees": 12
   }
 ]
